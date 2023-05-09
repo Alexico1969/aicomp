@@ -1,9 +1,12 @@
 
 from os import getenv, environ
 from flask import Flask, render_template, session, request, redirect, url_for, g
+from db import init_db, get_db, close_db, get_assignments, add_assignment, delete_assignment
 
 
 app=Flask(__name__, static_url_path='/static')
+
+init_db()
 
 app.secret_key = 'Bruce Wayne is Batman'
 
@@ -23,6 +26,35 @@ def signup():
 def logout():
     session.pop('userid', None)
     return redirect(url_for('home_page'))
+
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+
+    if request.method == 'POST':
+        try:
+            action = request.form['action']
+            if action[:3] == "Del":
+                print(f"Deleting {action[9:]}")
+                delete_assignment(action[9:])
+            else:
+                name = request.form['name']
+                description = request.form['description']
+                level = request.form['level']
+                add_assignment(name, description, level)
+        except:
+            print("Error adding assignment")
+            pass
+       
+    assignments = get_assignments()
+
+    return render_template('admin.html', assignments=assignments)
+
+@app.route('/admin_delete/<name>', methods=['GET', 'POST'])
+def admin_delete(name):
+    delete_assignment(name)
+    return f"Deleted assignment {name}"
+
+
 
 # Do not alter this if statement below
 # This should stay towards the bottom of this file

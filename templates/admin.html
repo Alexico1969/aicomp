@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h3>Archbishop Molloy HS - AI competition</h3>
+    <br>
+    <!-- show table with assignments (columns: name, level) -->
+    <h4>Assignments</h4>
+    <br>
+    <form class="indent20" action="{{ url_for('admin') }}" method="post">
+    <table>
+        <tr><th>Name</th><th>level</th><th>action</th></tr>
+        {% for a in assignments %}
+            <tr>
+                <td title="{{ a.description }}">{{ a.name }}</td>
+                <td>{{ a.level }}</td>
+                <td><input type="submit" value="Delete | {{ a.name }}" name="action"></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <!-- form to add new assignment -->
+    <h5>Add new Assignment</h5>
+
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name">
+        <label for="level">Level:</label>
+        <select id="level" name="level">
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+        </select>
+        <label for="description">Description:</label>
+        <input type="text" name="description" style="width: 600px;" id="description">
+        <input type="submit" value="Add" name="action" >
+    </form>
+
+    
+    
+    
+    
+    {% endblock %}
+
+{% block scripts %}
+    <script>
+    $(document).ready(function(){
+        console.log('--- js file loaded ---');
+
+        var content =  $.ajax({
+            url: "https://api.nasa.gov/planetary/apod?api_key=VM2f40EQQ0tk58nvmPhpVa6gthc5ma6Chgll56N7",
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(result){
+                console.log(result);
+            }
+
+
+
+        })
+    })
+    </script>
+    <script src="{{ url_for('static', filename='javascript/home.js') }}"></script>
+{% endblock %}
