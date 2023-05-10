@@ -18,6 +18,7 @@ h4 {
     color: ivory;
     background-color: rgb(100, 53, 5);
     padding: 15px;
+
 }
 
 h5 {
@@ -26,6 +27,7 @@ h5 {
     width: 280px;
     padding: 15px;
     margin-bottom: 20px;
+    border-radius: 0px 15px 15px 0px;
 }
 
 .indent20{
@@ -66,4 +68,15 @@ th{
 
 th,td{
     padding: 5px;
+}
+
+.sticky{
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
+
+.add_new{
+    position: absolute;
+    bottom: 20px;
 }

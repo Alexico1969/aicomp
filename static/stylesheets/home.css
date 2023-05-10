@@ -1,3 +1,29 @@
-/*
-    Use this file to apply custom styling to the home.html template
-*/
+/* Define the basic styles for the grid */
+.grid {
+    display: grid;
+    width: 80%; /* Adjust as needed */
+}
+
+/* Define the size of each column in the grid */
+.column-1 {
+    grid-template-columns: auto;
+    margin: 5px;
+}
+
+/* Define the content inside the first column */
+.content-1 {
+    background-color: lightblue;
+    padding: 10px;
+}
+
+/* Repeat the same styling for the second column */
+.column-2 {
+    grid-template-columns: auto;
+    margin: 5px;
+}
+
+/* Define the content inside the second column */
+.content-2 {
+    background-color: lightgreen;
+    padding: 10px;
+}

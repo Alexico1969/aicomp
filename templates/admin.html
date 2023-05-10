@@ -6,33 +6,40 @@
     <!-- show table with assignments (columns: name, level) -->
     <h4>Assignments</h4>
     <br>
-    <form class="indent20" action="{{ url_for('admin') }}" method="post">
-    <table>
-        <tr><th>Name</th><th>level</th><th>action</th></tr>
-        {% for a in assignments %}
-            <tr>
-                <td title="{{ a.description }}">{{ a.name }}</td>
-                <td>{{ a.level }}</td>
-                <td><input type="submit" value="Delete | {{ a.name }}" name="action"></td>
-            </tr>
-        {% endfor %}
-    </table>
+    <div class="list">
+        <form class="indent20" action="{{ url_for('admin') }}" method="post">
+            <table>
+                <tr><th>Name</th><th>level</th><th>action</th></tr>
+                {% for a in assignments %}
+                    <tr>
+                        <td title="{{ a.description }}">{{ a.name }}</td>
+                        <td>{{ a.level }}</td>
+                        <td><input type="submit" value="Delete | {{ a.name }}" name="action"></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </form>
+    </div>
+    
     <br>
     <!-- form to add new assignment -->
-    <h5>Add new Assignment</h5>
-
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name">
-        <label for="level">Level:</label>
-        <select id="level" name="level">
-            <option value="Easy">Easy</option>
-            <option value="Medium">Medium</option>
-            <option value="Hard">Hard</option>
-        </select>
-        <label for="description">Description:</label>
-        <input type="text" name="description" style="width: 600px;" id="description">
-        <input type="submit" value="Add" name="action" >
-    </form>
+    <div class="add_new">
+        <h5>Add new Assignment</h5>
+        <form class="indent20" action="{{ url_for('admin') }}" method="post">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name">
+            <label for="level">Level:</label>
+            <select id="level" name="level">
+                <option value="Easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+            </select>
+            <label for="description">Description:</label>
+            <input type="text" name="description" style="width: 600px;" id="description">
+            <input type="submit" value="Add" name="action" >
+        </form>
+    </div>
+    
 
     
     
