@@ -39,3 +39,10 @@ def delete_assignment(name):
     cursor.execute("DELETE FROM assignments WHERE name=?", (name,))
     db.commit()
     return "Assignment deleted"
+
+def get_filtered_assignments(level):
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM assignments WHERE level=?", (level,))
+    assignments = cursor.fetchall()
+    return assignments

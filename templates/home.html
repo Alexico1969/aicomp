@@ -4,16 +4,37 @@
     <h3>Archbishop Molloy HS - AI competition</h3>
 
 	<div class="main">
-		<!-- Add the first column using the "column-1" class -->
+
 		<div class="widget">
-			<!-- Add the content using the "content-1" class -->
-			<div class="content-1">Column 1 Content</div>
+		
+			<div class="content-1">
+                <h3 class="widget-title">Assignments</h3>
+                <form method="POST" action="">
+                    <div class="buttons">
+                        <button type="submit" id="easy-btn" name="level" value="Easy">Easy</button>
+                        <button type="submit" id="medium-btn" name="level" value="Medium">Medium</button>
+                        <button type="submit" id="hard-btn" name="level" value="Hard">Hard</button>
+                    </div>
+                </form>
+                <h1 id="assignment" class="assignment">{{ title }}</h1>
+                <h6 id="description" class="description">
+                    {{ description | safe }}
+                </h6>
+            </div>
 		</div>
 
-		<!-- Add the second column using the "column-2" class -->
+
 		<div class="widget">
-			<!-- Add the content using the "content-2" class -->
-			<div class="content-2">Column 2 Content</div>
+	
+			<div class="content-2">
+                <h3 class="widget-title">Timer</h3>
+                <h1 class="stopwatch">00:00:00</h1>
+                <div class="buttons">
+                  <button id="stopwatch-start" class="start">Start</button>
+                  <button id="stopwatch-stop" class="stop">Stop</button>
+                  <button id="stopwatch-reset" class="reset">Reset</button>
+                </div>
+            </div>
 		</div>
 	</div>
 
@@ -37,6 +58,53 @@
 
 
         })
+
+        let startTime;
+let elapsedTime = 0;
+let timerInterval;
+let isRunning = false;
+
+const stopwatch = document.querySelector(".stopwatch");
+const startButton = document.querySelector(".start");
+
+function start() {
+  if (!isRunning) {
+    startTime = Date.now() - elapsedTime;
+    timerInterval = setInterval(() => {
+      elapsedTime = Date.now() - startTime;
+      updateStopwatch();
+    }, 10);
+    isRunning = true;
+    startButton.disabled = true;
+  }
+}
+
+        function stop() {
+        clearInterval(timerInterval);
+        isRunning = false;
+        startButton.disabled = false;
+        }
+
+        function reset() {
+        clearInterval(timerInterval);
+        elapsedTime = 0;
+        updateStopwatch();
+        isRunning = false;
+        startButton.disabled = false;
+        }
+
+        function updateStopwatch() {
+        const minutes = Math.floor(elapsedTime / 60000);
+        const seconds = Math.floor((elapsedTime % 60000) / 1000);
+        const milliseconds = Math.floor((elapsedTime % 1000) / 10);
+
+        stopwatch.textContent = `${minutes < 10 ? "0" : ""}${minutes}:${seconds < 10 ? "0" : ""}${seconds}:${milliseconds < 10 ? "0" : ""}${milliseconds}`;
+        }
+
+        document.querySelector(".start").addEventListener("click", start);
+        document.querySelector(".stop").addEventListener("click", stop);
+        document.querySelector(".reset").addEventListener("click", reset);
+
     })
     </script>
     <script src="{{ url_for('static', filename='javascript/home.js') }}"></script>

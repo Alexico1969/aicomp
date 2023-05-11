@@ -30,6 +30,14 @@ h5 {
     border-radius: 0px 15px 15px 0px;
 }
 
+button {
+    font-size: 1.2em;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border-radius: 15px;
+}
+
+
 .indent20{
     margin-left: 20px;
 }
@@ -81,36 +89,6 @@ th,td{
     bottom: 20px;
 }
 
-/* Define the basic styles for the grid */
-.grid {
-    display: grid;
-    width: 90%; /* Adjust as needed */
-}
-
-/* Define the size of each column in the grid */
-.column-1 {
-    grid-template-columns: auto;
-    margin: 5px;
-}
-
-/* Define the content inside the first column */
-.content-1 {
-    background-color: lightblue;
-    padding: 10px;
-}
-
-/* Repeat the same styling for the second column */
-.column-2 {
-    grid-template-columns: auto;
-    margin: 5px;
-}
-
-/* Define the content inside the second column */
-.content-2 {
-    background-color: lightgreen;
-    padding: 10px;
-}
-
 .main{
     display: flex;
     height: 90vh; 
@@ -125,7 +103,7 @@ th,td{
     padding: 5px;
     padding-top: 0px;
     width: 32%;
-    min-width: 300px;
+    min-width: 400px;
     text-align: center;
     border-radius: 10px;
     scrollbar-color:blue;
@@ -135,4 +113,106 @@ th,td{
 .scroll{
     overflow-y:scroll;
     scrollbar-color: blue;
+}
+
+.stopwatch-container {
+    text-align: center;
+    margin-top: 20px;
+}
+  
+.stopwatch {
+    font-size: 3em;
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 70px 10px 30px 10px;
+    color: white;
+    border: black 6px solid;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+.list{
+    height: 500px;
+    overflow-y:scroll
+}
+
+.assignment{
+    margin: 20px;
+    border-radius: 10px;
+    background-color: beige;
+    color: Black;
+}
+
+.description{
+    margin: 20px;
+    padding: 30px 5px 5px 5px;
+    border-radius: 10px;
+    background-color: beige;
+    color: Black;
+    min-height: 300px;
+}
+  
+.widget-title{
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    color: white;
+}
+
+#stopwatch-start{
+    background-color: #1bbb10;
+    color: white;
+    border: black 6px solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+#stopwatch-stop{
+    background-color: #bb1010;
+    color: white;
+    border: black 6px solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+#stopwatch-reset{
+    background-color: #1010bb;
+    color: white;
+    border: black 6px solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+#easy-btn{
+    background-color: #0d780d;
+    color: white;
+    border: black 6px solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+#medium-btn{
+    background-color: #fa800f;
+    color: white;
+    border: black 6px solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+#hard-btn{
+    background-color: #bb1027;
+    color: white;
+    border: black 6px solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
 }

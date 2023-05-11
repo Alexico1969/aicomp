@@ -1,7 +1,8 @@
 
 from os import getenv, environ
 from flask import Flask, render_template, session, request, redirect, url_for, g
-from db import init_db, get_db, close_db, get_assignments, add_assignment, delete_assignment
+from db import init_db, get_db, close_db, get_assignments, add_assignment, delete_assignment, get_filtered_assignments
+import random
 
 
 app=Flask(__name__, static_url_path='/static')
@@ -10,9 +11,21 @@ init_db()
 
 app.secret_key = 'Bruce Wayne is Batman'
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home_page():
-    return render_template('home.html')
+    title = "?"
+    description = "<br><br><br>"
+
+    if request.method == 'POST':
+        level = request.form['level']
+        print(f"Level: {level}")
+        assignments = get_filtered_assignments(level)
+        random_assignment = random.choice(assignments)
+        title = random_assignment[1]
+        description = random_assignment[2]
+
+
+    return render_template('home.html', title=title, description=description)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
