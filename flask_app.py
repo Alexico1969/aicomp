@@ -67,6 +67,28 @@ def admin_delete(name):
     delete_assignment(name)
     return f"Deleted assignment {name}"
 
+@app.route('/admin_edit', methods=['GET', 'POST'])
+def admin_edit():
+    name = ""
+
+    if request.method == 'POST':
+        try:
+            action = request.form['action']
+            if action[:3] == "Del":
+                print(f"Deleting {action[9:]}")
+                delete_assignment(action[9:])
+            elif action[:3] == "Edi":
+                print(f"Editing {action[7:]}")
+                name = action[7:]
+            
+        except:
+            print("Error editing / updating assignment")
+            pass
+       
+    assignments = get_assignments()
+
+    return render_template('edit.html', assignments=assignments, name=name)
+
 
 
 # Do not alter this if statement below

@@ -5,8 +5,8 @@
     <br>
     <!-- show table with assignments (columns: name, level) -->
     <h4>
-        Assignments - LIST&nbsp;&nbsp;
-       <a href="{{ url_for('admin_edit' ) }}"><button>Edit</button></a>
+        Assignments - EDIT  &nbsp;&nbsp;
+        <a href="{{ url_for('admin' ) }}"><button>List</button></a>
     </h4>
     <br>
     <div class="list">
@@ -17,7 +17,7 @@
                     <tr>
                         <td title="{{ a.description }}">{{ a.name }}</td>
                         <td>{{ a.level }}</td>
-                        <td><input type="submit" value="Delete | {{ a.name }}" name="action"></td>
+                        <td><input type="submit" value="Edit | {{ a.name }}" name="action"></td>
                     </tr>
                 {% endfor %}
             </table>
@@ -25,7 +25,8 @@
     </div>
     
     <br>
-    <!-- form to add new assignment -->
+    <!-- form to edit assignment -->
+    {% if name != "" %}
     <div class="add_new">
         <h5>Add new Assignment</h5>
         <form class="indent20" action="{{ url_for('admin') }}" method="post">
@@ -39,9 +40,10 @@
             </select>
             <label for="description">Description:</label>
             <input type="text" name="description" style="width: 600px;" id="description">
-            <input type="submit" value="Add" name="action" >
+            <input type="submit" value="update" name="action" >
         </form>
     </div>
+    {% endif %}
     
 
     
