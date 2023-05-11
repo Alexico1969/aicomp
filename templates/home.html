@@ -16,7 +16,7 @@
                         <button type="submit" id="hard-btn" name="level" value="Hard">Hard</button>
                     </div>
                 </form>
-                <h1 id="assignment" class="assignment">{{ title }}</h1>
+                <h1 id="title" class="assignment">{{ title }}</h1>
                 <h6 id="description" class="description">
                     {{ description | safe }}
                 </h6>
@@ -45,7 +45,8 @@
 {% block scripts %}
     <script>
     $(document).ready(function(){
-        console.log('--- js file loaded ---');
+        const elementToHide = document.getElementById('description');
+        elementToHide.style.display = 'none';
 
         var content =  $.ajax({
             url: "https://api.nasa.gov/planetary/apod?api_key=VM2f40EQQ0tk58nvmPhpVa6gthc5ma6Chgll56N7",
@@ -60,24 +61,24 @@
         })
 
         let startTime;
-let elapsedTime = 0;
-let timerInterval;
-let isRunning = false;
+        let elapsedTime = 0;
+        let timerInterval;
+        let isRunning = false;
 
-const stopwatch = document.querySelector(".stopwatch");
-const startButton = document.querySelector(".start");
+        const stopwatch = document.querySelector(".stopwatch");
+        const startButton = document.querySelector(".start");
 
-function start() {
-  if (!isRunning) {
-    startTime = Date.now() - elapsedTime;
-    timerInterval = setInterval(() => {
-      elapsedTime = Date.now() - startTime;
-      updateStopwatch();
-    }, 10);
-    isRunning = true;
-    startButton.disabled = true;
-  }
-}
+        function start() {
+        if (!isRunning) {
+            startTime = Date.now() - elapsedTime;
+            timerInterval = setInterval(() => {
+            elapsedTime = Date.now() - startTime;
+            updateStopwatch();
+            }, 10);
+            isRunning = true;
+            startButton.disabled = true;
+        }
+        }
 
         function stop() {
         clearInterval(timerInterval);
@@ -104,6 +105,34 @@ function start() {
         document.querySelector(".start").addEventListener("click", start);
         document.querySelector(".stop").addEventListener("click", stop);
         document.querySelector(".reset").addEventListener("click", reset);
+
+        // Get the title element by its ID
+        const titleElement = document.getElementById('title');
+        const titleStartText = titleElement.innerText;
+
+
+        // Define a function to generate a random string of 30 characters
+        function generateRandomString() {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < 13; i++) {
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return result;
+        }
+
+        // Set up a timer that changes the text of the title element every 10th of a second
+        const intervalId = setInterval(() => {
+        titleElement.innerText = generateRandomString();
+        }, 13);
+
+        // Stop the timer after 2 seconds (2000 milliseconds)
+        setTimeout(() => {
+        clearInterval(intervalId);
+        titleElement.innerText = titleStartText;
+        elementToHide.style.display = '';
+        }, 2000);
+
 
     })
     </script>
