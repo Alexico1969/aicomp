@@ -1,7 +1,8 @@
 
 from os import getenv, environ
 from flask import Flask, render_template, session, request, redirect, url_for, g
-from db import init_db, get_db, close_db, get_assignments, add_assignment, delete_assignment, get_filtered_assignments
+from db import init_db, get_db, close_db, get_assignments, add_assignment, delete_assignment
+from db import get_filtered_assignments, find_assignment, update_assignment
 import random
 
 
@@ -70,24 +71,32 @@ def admin_delete(name):
 @app.route('/admin_edit', methods=['GET', 'POST'])
 def admin_edit():
     name = ""
+    description = ""
+    level = ""
 
     if request.method == 'POST':
         try:
             action = request.form['action']
-            if action[:3] == "Del":
-                print(f"Deleting {action[9:]}")
-                delete_assignment(action[9:])
-            elif action[:3] == "Edi":
+            if action[:3] == "Edi":
                 print(f"Editing {action[7:]}")
                 name = action[7:]
-            
+                assignment = find_assignment(name)
+                description = assignment[1]
+                level = assignment[0]
+                update_assignment(name, description, level)
+                print(f"Updated {name}")
+
         except:
             print("Error editing / updating assignment")
             pass
        
     assignments = get_assignments()
 
-    return render_template('edit.html', assignments=assignments, name=name)
+    return render_template('edit.html', 
+                           assignments=assignments, 
+                           name=name, 
+                           description=description, 
+                           level=level)
 
 
 

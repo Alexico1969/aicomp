@@ -16,7 +16,8 @@
                         <button type="submit" id="hard-btn" name="level" value="Hard">Hard</button>
                     </div>
                 </form>
-                <h1 id="title" class="assignment">{{ title }}</h1>
+                <p class="hidden" id="initial_title">{{ title }}</p>
+                <h1 id="title" class="assignment">?</h1>
                 <h6 id="description" class="description">
                     {{ description | safe }}
                 </h6>
@@ -36,6 +37,7 @@
                 </div>
             </div>
 		</div>
+        <img width="300px" class="sticky" src="{{url_for('static', filename='img/Robot_01_no_bg.png')}}" alt="robot" class="logo">
 	</div>
 
 
@@ -107,9 +109,9 @@
         document.querySelector(".reset").addEventListener("click", reset);
 
         // Get the title element by its ID
+        const hiddenElement = document.getElementById('initial_title');
+        const titleStartText = hiddenElement.innerText;
         const titleElement = document.getElementById('title');
-        const titleStartText = titleElement.innerText;
-
 
         // Define a function to generate a random string of 30 characters
         function generateRandomString() {

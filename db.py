@@ -26,6 +26,13 @@ def get_assignments():
     assignments = cursor.fetchall()
     return assignments
 
+def find_assignment(name):
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT level, description FROM assignments WHERE name=?", (name,))
+    assignment = cursor.fetchone()
+    return assignment
+
 def add_assignment(name, description, level):
     db = get_db()
     cursor = db.cursor()
@@ -39,6 +46,13 @@ def delete_assignment(name):
     cursor.execute("DELETE FROM assignments WHERE name=?", (name,))
     db.commit()
     return "Assignment deleted"
+
+def update_assignment(name, description, level):
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("UPDATE assignments SET description=?, level=? WHERE name=?", (description, level, name))
+    db.commit()
+    return "Assignment updated"
 
 def get_filtered_assignments(level):
     db = get_db()

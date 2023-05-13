@@ -22,8 +22,8 @@ h4 {
 }
 
 h5 {
-    color: black;
-    background-color:#8d5104;
+    color: beige;
+    background-color:#422907;
     width: 280px;
     padding: 15px;
     margin-bottom: 20px;
@@ -87,6 +87,10 @@ th,td{
 .add_new{
     position: absolute;
     bottom: 20px;
+    background-color: rgba(0,0,0,0.6);
+    border-radius: 0 15px 0 0;
+    padding-right: 20px;
+    padding-bottom: 10px;
 }
 
 .main{
@@ -161,6 +165,10 @@ th,td{
     padding: 10px;
     margin: 10px;
     color: white;
+}
+
+.hidden{
+    display: none;
 }
 
 #stopwatch-start{

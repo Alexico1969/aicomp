@@ -10,7 +10,7 @@
     </h4>
     <br>
     <div class="list">
-        <form class="indent20" action="{{ url_for('admin') }}" method="post">
+        <form class="indent20" action="{{ url_for('admin_edit') }}" method="post">
             <table>
                 <tr><th>Name</th><th>level</th><th>action</th></tr>
                 {% for a in assignments %}
@@ -22,24 +22,25 @@
                 {% endfor %}
             </table>
         </form>
+        <br><br><br><br><br><br><br><br>
     </div>
     
     <br>
     <!-- form to edit assignment -->
     {% if name != "" %}
     <div class="add_new">
-        <h5>Add new Assignment</h5>
-        <form class="indent20" action="{{ url_for('admin') }}" method="post">
+        <h5>Edit/Update Assignment</h5>
+        <form class="indent20" action="{{ url_for('admin_edit') }}" method="post">
             <label for="name">Name:</label>
-            <input type="text" name="name" id="name">
+            <input value = "{{name}}" type="text" name="name" id="name">
             <label for="level">Level:</label>
             <select id="level" name="level">
-                <option value="Easy">Easy</option>
-                <option value="Medium">Medium</option>
-                <option value="Hard">Hard</option>
+                <option value="Easy" {% if level == 'Easy' %} selected{% endif %}>Easy</option>
+                <option value="Medium"  {% if level == 'Medium' %} selected{% endif %}>Medium</option>
+                <option value="Hard"  {% if level == 'Hard' %} selected{% endif %}>Hard</option>
             </select>
             <label for="description">Description:</label>
-            <input type="text" name="description" style="width: 600px;" id="description">
+            <input value="{{ description }}" type="text" name="description" style="width: 600px;" id="description">
             <input type="submit" value="update" name="action" >
         </form>
     </div>
