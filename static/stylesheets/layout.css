@@ -113,6 +113,13 @@ th,td{
     scrollbar-color:blue;
 }
 
+.url{
+    font-size: 250%;
+    color: beige;
+    font-weight: bold;
+
+}
+
 
 .scroll{
     overflow-y:scroll;
